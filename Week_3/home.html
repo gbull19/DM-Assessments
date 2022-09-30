@@ -3,9 +3,6 @@
 <head>
 	<title>Homepage</title>
 	<link href="styles.css" rel="stylesheet">
-
-</head>
-<body>
 	<nav>
 		<ol>
 	        <li class="crumb"><a href="./home.html">Home</a></li>
@@ -13,10 +10,13 @@
 	        <li class="crumb"><a href="./about.html">About</a></li>
 	    </ol>
 	</nav>
+</head>
+<body>
+
 
 	<content class="container">
-		<h1>Say Hello to Me Little Friend</h1>
-		<p>Hello World, nice to meet you</p>
+		<h1>Say Hello to My Little Friend</h1>
+		<p>Hello World, nice to meet you!</p>
 		<div id="imageContainer">
 			<img src="https://github.com/gbull19/hosting/blob/main/cool_cat.jpg?raw=true">
 		</div>
@@ -27,14 +27,13 @@
 			<input type="text">
 			Message:
 			<input type="textarea">
-			<input type="submit">
+			<br>
 			How Did You Hear About Our Website:
-			<input type="checkbox">
-			<label for="google">Google</label><br>
-			<input type="checkbox">
-			<label for="friend">Friend</label><br>
-			<input type="checkbox">
-			<label for="other">Other</label><br>
+			<label><input type="checkbox" value="google">Google</label>
+			<label><input type="checkbox" value="friend">Friend</label>
+			<label><input type="checkbox" value="other">Other</label>
+			<br>
+			<input id="submit" type="submit">
 		</form>
 		<p>Welcome. Open those gates so I may unlock your secrets and exploit your riches.</p>
 		<ul>
