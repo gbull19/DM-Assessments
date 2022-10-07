@@ -1,21 +1,44 @@
-const compliments = ["Gee, you're a smart cookie!", "Cool shirt!", "Your Javascript skills are stellar."];
+const compliments = [ {
+    id: 1,
+    text: "Gee, you're a smart cookie!",
+ },
+ {  id: 2,
+    text: "Cool shirt!",
+},
+{   id: 3,
+    text: "Your Javascript skills are stellar.",
+}
+];
+let globalId = 4
 
 module.exports = {
 
     getCompliment: (req, res) => {
         let randomIndex = Math.floor(Math.random() * compliments.length);
-        let randomCompliment = compliments[randomIndex];
+        let randomCompliment = compliments[randomIndex].text;
+        console.table(compliments);
         res.status(200).send(randomCompliment);
     },
     addCompliment: (req, res) => {
-        let newComp = (req.data);
+        let newComp = {
+            id: globalId,
+            text: req.body.text
+        }
         compliments.push(newComp);
         console.table(compliments);
+        globalId++;
         res.status(200).send(compliments);
     },
     deleteCompliment: (req, res) => {
         let randomIndex = Math.floor(Math.random() * compliments.length);
         compliments.splice(randomIndex -1, 1);
+        console.table(compliments);
+        res.status(200).send(compliments);
+    },
+    updateCompliment: (req, res) => {
+        let randomIndex = Math.floor(Math.random() * compliments.length);
+        let updateComp = req.body.text;
+        compliments[randomIndex].text = updateComp;
         console.table(compliments);
         res.status(200).send(compliments);
     },

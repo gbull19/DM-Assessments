@@ -7,14 +7,15 @@ app.use(express.json());
 const { getCompliment,
     getFortune,
     deleteCompliment,
-    addCompliment
-    // updateCompliment
+    addCompliment,
+    updateCompliment
 } = require('./controller')
 
 app.get("/api/fortune", getFortune);
+
 app.get("/api/compliment", getCompliment);
 app.post("/api/compliment", addCompliment);
 app.delete("/api/compliment/", deleteCompliment);
-// app.put("/api/compliment/:id", updateCompliment);
+app.put("/api/compliment/:id", updateCompliment);
 
 app.listen(4000, () => console.log("Server running on 4000"));

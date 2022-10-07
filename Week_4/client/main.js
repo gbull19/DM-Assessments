@@ -1,3 +1,5 @@
+// const stringify = require("flatted/cjs")
+
 const fortuneButton = document.getElementById("fortuneButton");
 
 const getFortune = () => {
@@ -9,6 +11,9 @@ const getFortune = () => {
 };
 
 fortuneButton.addEventListener("click", getFortune);
+
+
+
 
 
 const complimentBtn = document.getElementById("complimentButton")
@@ -24,6 +29,9 @@ const getCompliment = () => {
 complimentBtn.addEventListener('click', getCompliment)
 
 
+
+
+
 const deleteCompBtn = document.getElementById("deleteCompBtn")
 
 const deleteComp = () => {
@@ -35,19 +43,48 @@ const deleteComp = () => {
 deleteCompBtn.addEventListener('click', deleteComp)
 
 
-const form = document.querySelector('form')
+
+
+
+const newComplimentForm = document.querySelector('#newCompliment')
 
 const createCompliment = (body) => {
-    axios.post("http://localhost:4000/api/compliment", body)
+    axios.post("http://localhost:4000/api/compliment/", body)
         .then(alert("New compliment added"))
+        .catch(err => console.log(err))
+}
+
+const compSubHandler = (event) => {
+    event.preventDefault()
+    let text = document.querySelector("#inputNewComp")
+    let newCompObj = {
+        text: text.value
+    } 
+    // console.log(newComp.value)
+    createCompliment(newCompObj)
+};
+
+newComplimentForm.addEventListener("submit", compSubHandler);
+
+
+
+
+const updateComplimentForm = document.querySelector('#updateCompliment')
+
+const updateCompliment = (body) => {
+    axios.put("http://localhost:4000/api/compliment/:id", body)
+        .then(alert("Random compliment updated!"))
         .catch(err => console.log(err))
 }
 
 function submitHandler (event) {
     event.preventDefault()
-    let newComp = document.querySelector("input")
-    console.log(newComp)
-    createCompliment(newComp)
+    let updateComp = document.querySelector("#inputUpComp")
+    let updateCompObj = {
+        text: updateComp.value
+    } 
+    // console.log(updateComp.value)
+    updateCompliment(updateCompObj)
 };
 
-form.addEventListener("submit", submitHandler);
+updateComplimentForm.addEventListener("submit", submitHandler);
