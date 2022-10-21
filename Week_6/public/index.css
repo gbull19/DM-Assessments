@@ -86,3 +86,9 @@ button:hover {
 #results {
     color: #F6921E;
 }
+
+#all-bots {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}

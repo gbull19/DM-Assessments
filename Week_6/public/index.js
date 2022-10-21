@@ -12,6 +12,7 @@ const lossesTest = document.querySelector('#losses')
 const chooseHeader = document.querySelector('#choose-header')
 const yourDuoHeader = document.querySelector('#your-duo-header')
 const compDuoHeader = document.querySelector('#comp-duo-header')
+const resetBtn = document.querySelector('#reset')
 
 let choices = []
 let compDuo = []
@@ -155,6 +156,7 @@ const reset = () => {
     renderPlayerDuo()
     drawBtn.classList.remove('hide')
     compDuoHeader.classList.add('hide')
+    drawFive() // DRAW
 }
 
 const getPlayerStats = () => {
@@ -177,9 +179,19 @@ const getAllBots = () => {
         })
 }
 
+const resetRecord = () => {
+    axios.get('/api/reset')
+        .then(({data: {wins, losses}}) => {
+            winsText.textContent = `Wins: ${wins}`
+            lossesTest.textContent = `Losses: ${losses}`
+    })
+}
+
 drawBtn.addEventListener('click', drawFive)
 duelBtn.addEventListener('click', duel)
 playAgainBtn.addEventListener('click', reset)
 seeAllBtn.addEventListener('click', getAllBots)
+resetBtn.addEventListener('click', resetRecord)
+allBotsDiv.addEventListener('click', () => allBotsDiv.innerHTML = '')
 
 getPlayerStats()

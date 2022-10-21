@@ -12,7 +12,7 @@ app.use(express.static('public'));
 const {ACCESS_TOKEN} = process.env;
 let Rollbar = require('rollbar');
 let rollbar = new Rollbar({
-  accessToken: '25ceaff6e99c489481f7fff6d04713b1',
+  accessToken: '09d84a3b89844145b55526f8531e7681',
   captureUncaught: true,
   captureUnhandledRejections: true,
 });
@@ -20,6 +20,7 @@ let rollbar = new Rollbar({
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/index.html'));
 })
+
 
 app.get('/styles', (req, res) => {
     try {
@@ -42,7 +43,7 @@ app.get('/js', (req, res) => {
 app.get('/api/robots', (req, res) => {
     try {
         rollbar.log('See All Bots requested')
-        res.status(200).send(botsArr)  // botsArr is bad
+        res.status(200).send(bots)
     } catch (error) {
         console.log('ERROR GETTING BOTS', error)
         res.sendStatus(400)
@@ -85,7 +86,7 @@ app.post('/api/duel', (req, res) => {
             playerRecord.losses++
             res.status(200).send('You lost!')
         } else {
-            playerRecord.losses++
+            playerRecord.wins++
             res.status(200).send('You won!')
         }
     } catch (error) {
@@ -102,6 +103,12 @@ app.get('/api/player', (req, res) => {
         console.log('ERROR GETTING PLAYER STATS', error)
         res.sendStatus(400)
     }
+})
+
+app.get('/api/reset', (req, res) => {
+        playerRecord.wins = 0;
+        playerRecord.losses = 0;
+        res.status(200).send(playerRecord);
 })
 
 const port = process.env.PORT || 3000
