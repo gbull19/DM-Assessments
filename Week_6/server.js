@@ -9,6 +9,13 @@ app.use(express.json());
 app.use(cors());
 app.use(express.static('public'));
 
+const {ACCESS_TOKEN} = process.env;
+let Rollbar = require('rollbar');
+let rollbar = new Rollbar({
+  accessToken: '25ceaff6e99c489481f7fff6d04713b1',
+  captureUncaught: true,
+  captureUnhandledRejections: true,
+});
 
 app.get('/styles', (req, res) => {
     try {
@@ -30,6 +37,7 @@ app.get('/js', (req, res) => {
 
 app.get('/api/robots', (req, res) => {
     try {
+        rollbar.log('See All Bots requested')
         res.status(200).send(botsArr)  // botsArr is bad
     } catch (error) {
         console.log('ERROR GETTING BOTS', error)
@@ -39,6 +47,7 @@ app.get('/api/robots', (req, res) => {
 
 app.get('/api/robots/five', (req, res) => {
     try {
+        rollbar.log('Draw clicked')
         let shuffled = shuffleArray(bots)
         let choices = shuffled.slice(0, 5)
         let compDuo = shuffled.slice(6, 8)
@@ -51,6 +60,7 @@ app.get('/api/robots/five', (req, res) => {
 
 app.post('/api/duel', (req, res) => {
     try {
+        rollbar.log('Duel initiated')
         // getting the duos from the front end
         let {compDuo, playerDuo} = req.body
 
@@ -84,6 +94,7 @@ app.get('/api/player', (req, res) => {
     try {
         res.status(200).send(playerRecord)
     } catch (error) {
+        rollbar.error('Error Getting Player Stats')
         console.log('ERROR GETTING PLAYER STATS', error)
         res.sendStatus(400)
     }
