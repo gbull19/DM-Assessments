@@ -31,7 +31,7 @@ const password = "Lukas4TheWin!";
 const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 
 switch (true) {
-    case (password.length >= 10 && /[0-9]/.test(password) && /[a-z]/.test(password) && specialChars.test(password) && /[A-Z]/.test(password)):
+    case (password.length >= 10 && /[0-9]/.test(password) && specialChars.test(password) && /[a-z]/.test(password)  && /[A-Z]/.test(password)):
         console.log("Password saved successfully!");
         break;
     case (!password.length >= 10):
